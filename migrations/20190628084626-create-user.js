@@ -8,15 +8,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nis: {
+      nomor_induk: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      nama_siswa: {
+      nama_lengkap: {
         allowNull: false,
         type: Sequelize.STRING
       },
       alamat: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      nomor_hp:{
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      email:{
         allowNull: false,
         type: Sequelize.STRING
       },
