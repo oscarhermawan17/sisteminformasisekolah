@@ -11,6 +11,9 @@ module.exports = {
       nama_mata_pelajaran: {
         type: Sequelize.STRING
       },
+      status: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

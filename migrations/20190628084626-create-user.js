@@ -16,6 +16,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      username: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      password: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       alamat: {
         allowNull: false,
         type: Sequelize.STRING
@@ -28,17 +36,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      username: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      password: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       role: {
         allowNull: false,
         type: Sequelize.INTEGER
+      },
+      status_angkatan: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       status: {
         allowNull: false,

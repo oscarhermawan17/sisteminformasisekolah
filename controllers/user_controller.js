@@ -6,15 +6,16 @@ const methods = {};
 methods.createUser = (req,res)=>{
     bcrypt.hash(req.body.password, saltRounds)
     .then((hash)=>{
-            db.User.create({
+        db.User.create({
             nomor_induk:req.body.nomor_induk,
             nama_lengkap:req.body.nama_lengkap,
-            alamat:req.body.alamat,
             username:req.body.username,
             password:hash,
-            email:req.body.email,
+            alamat:req.body.alamat,
             nomor_hp:req.body.nomor_hp,
+            email:req.body.email,
             role:1,
+            status_angkatan:req.body.status_angkatan,
             status:'available'
         })
         .then(user =>{
