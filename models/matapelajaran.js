@@ -6,6 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   MataPelajaran.associate = function(models) {
     // associations can be defined here
+    MataPelajaran.belongsToMany(models.User, {
+      through: 'GuruMataPelajaran',
+      as: 'mata_pelajaran',
+      foreignKey: 'id_mata_pelajaran',
+    });
   };
   return MataPelajaran;
 };

@@ -4,6 +4,9 @@ const cors  = require('cors');
 const bodyParser = require('body-parser');
 
 var users = require('./routes/users');
+var mata_pelajaran = require('./routes/mata_pelajaran');
+var kelas = require('./routes/kelas');
+var guru_mata_pelajaran = require('./routes/guru_mata_pelajaran');
 var loginAuth = require('./routes/loginAuth');
 
 app.use(bodyParser.json());
@@ -24,6 +27,9 @@ const sequelize = new Sequelize('sisteminformasi', 'root', null, {
 });
 
 app.use('/users', users);
+app.use('/kelas', kelas);
+app.use('/mata_pelajaran', mata_pelajaran);
+app.use('/guru_mata_pelajaran', guru_mata_pelajaran);
 app.use('/login', loginAuth);
 
 app.listen(3000)
