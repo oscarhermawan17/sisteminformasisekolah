@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const cors  = require('cors');
 const bodyParser = require('body-parser');
+app.use(cors());
+
 
 var users = require('./routes/users');
 var mata_pelajaran = require('./routes/mata_pelajaran');
@@ -12,9 +14,9 @@ var loginAuth = require('./routes/loginAuth');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors());
+
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('sisteminformasi', 'root', null, {
+const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASS, {
   host: 'localhost',
   dialect: 'mysql',
   pool: {
@@ -32,4 +34,4 @@ app.use('/mata_pelajaran', mata_pelajaran);
 app.use('/guru_mata_pelajaran', guru_mata_pelajaran);
 app.use('/login', loginAuth);
 
-app.listen(3000)
+app.listen(3001)

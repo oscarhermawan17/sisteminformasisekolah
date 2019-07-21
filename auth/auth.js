@@ -17,7 +17,7 @@ methods.login = function(req,res){
               }
             })
             .then(attributesUser => {
-                let token = jwt.sign({username:attributesUser.username }, 'secret', { expiresIn: 60 * 60 })
+                let token = jwt.sign({username:attributesUser.username }, process.env.SECRET, { expiresIn: 60 * 60 })
                 res.send({status:"success", token})
             })
             .catch((err)=>{
