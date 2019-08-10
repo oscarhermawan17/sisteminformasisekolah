@@ -3,7 +3,7 @@ const app = express()
 const cors  = require('cors');
 const bodyParser = require('body-parser');
 app.use(cors());
-
+require('dotenv').config();
 
 var users = require('./routes/users');
 var mata_pelajaran = require('./routes/mata_pelajaran');

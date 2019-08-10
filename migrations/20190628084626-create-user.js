@@ -17,7 +17,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       username: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       password: {
@@ -26,6 +25,9 @@ module.exports = {
       },
       alamat: {
         allowNull: false,
+        type: Sequelize.STRING
+      },
+      gender: {
         type: Sequelize.STRING
       },
       nomor_hp:{
@@ -41,7 +43,6 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       status_angkatan: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       status: {

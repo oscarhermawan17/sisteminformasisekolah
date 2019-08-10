@@ -14,8 +14,7 @@ methods.createUser = (req,res)=>{
             alamat:req.body.alamat,
             nomor_hp:req.body.nomor_hp,
             email:req.body.email,
-            role:1,
-            status_angkatan:req.body.status_angkatan,
+            role:req.body.role,
             status:'available'
         })
         .then(user =>{
@@ -26,16 +25,16 @@ methods.createUser = (req,res)=>{
         })
     })
     .catch((err)=>{
-        console.log(err.message)
         res.send({status:"failed", message_response:err.message})
     })
 }
 
-methods.getAllUsers = (req,res) =>{
+methods.getAllTeachers = (req,res) =>{
     db.User.findAll({
-        attributes:['nomor_induk','nama_lengkap', 'alamat', 'nomor_hp', 'email', 'username',],
+        attributes:['id', 'nomor_induk','nama_lengkap', 'alamat', 'nomor_hp', 'email', 'username',],
         where:{
-            status:['available', '1', '2', '3']
+            status:['available'],
+            role:3
         },
         include: [{
             attributes:['role'],
@@ -43,7 +42,27 @@ methods.getAllUsers = (req,res) =>{
         }]
     })
     .then(users=>{
-        res.send({status:"success", data:users, message_response:"success find all user"})
+        res.send({status:"success", data:users, message_response:"success find all students"})
+    })
+    .catch((err)=>{
+        res.send({status:"failed", message_response:"failed find all users"})
+    })
+}
+
+methods.getAllStudents = (req,res) =>{
+    db.User.findAll({
+        attributes:['id', 'nomor_induk','nama_lengkap', 'alamat', 'gender', 'nomor_hp', 'email', 'username',],
+        where:{
+            status:['available'],
+            role:2
+        },
+        include: [{
+            attributes:['role'],
+            model: db.Role,
+        }]
+    })
+    .then(users=>{
+        res.send({status:"success", data:users, message_response:"success find all students"})
     })
     .catch((err)=>{
         res.send({status:"failed", message_response:"failed find all users"})
@@ -76,16 +95,16 @@ methods.updateUser = async function(req,res){
 
 //hapus hanya mengubah "status" menjadi deleted
 methods.deleteUser = async function(req,res){
-    console.log("masuk", req.body.nomor_induk)
+    console.log(req.body)
     try {
         const tmpUser = await db.User.update(
             {status:"deleted"},    
-            {where:{ nomor_induk:req.body.nomor_induk}})
+            {where:{ id:req.body.id}})
         
         if(tmpUser[0] === 1){
             db.User.findOne({
                 where:{
-                    nomor_induk:req.body.nomor_induk
+                    id:req.body.id
                 }})
             .then(user=>{
                 res.send({status:"success", data:user, message_response:"Sukses hapus user"})
