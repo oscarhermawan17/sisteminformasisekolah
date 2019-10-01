@@ -9,8 +9,8 @@ Web ini dibuat untuk menampilkan nilai nilai dari siswa di suatu sekolah. Dimana
 
 ## Cara Menjalankannya
 
-* ketik ada command line => sequelize db:migrate (untuk membuat table database, relasi, atribut)
-* ketik ada command line => sequelize db:seed:all (untuk membuat data default secara acak / random)
+* ketik pada command line => sequelize db:migrate (untuk membuat table database, relasi, atribut)
+* ketik pada command line => sequelize db:seed:all (untuk membuat data default secara acak / random)
 * Siswa dapat menggunakan nomor induk
 * Orang tua siswa dapat login menggunakan nomor hp nya
 * Semua password di set 'admin'

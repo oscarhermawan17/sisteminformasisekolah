@@ -9,7 +9,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nomor_induk: {
-        allowNull: false,
+        type: Sequelize.STRING
+      },
+      nomor_induk_pegawai:{
         type: Sequelize.STRING
       },
       nama_lengkap: {
@@ -23,6 +25,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      password_orang_tua: {
+        type: Sequelize.STRING
+      },
       alamat: {
         allowNull: false,
         type: Sequelize.STRING
@@ -32,6 +37,9 @@ module.exports = {
       },
       nomor_hp:{
         allowNull: false,
+        type: Sequelize.STRING
+      },
+      nomor_hp_orang_tua:{
         type: Sequelize.STRING
       },
       email:{

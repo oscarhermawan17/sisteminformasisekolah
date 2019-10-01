@@ -5,7 +5,8 @@ var saltRounds = 10;
 var jwt = require('jsonwebtoken');
 var methods = {}
 
-methods.login = function(req,res){
+methods.login = (req,res) => {
+  // logic 3 login belum
   db.User.findOne({where : {username:req.body.username}})
   .then((user)=>{
     bcrypt.compare(req.body.password, user.password)
@@ -17,7 +18,7 @@ methods.login = function(req,res){
               }
             })
             .then(attributesUser => {
-                let token = jwt.sign({username:attributesUser.username }, process.env.SECRET, { expiresIn: 60 * 60 })
+                let token = jwt.sign({username:attributesUser.username }, process.env.SECRET, { expiresIn: 60*60 })
                 res.send({status:"success", token})
             })
             .catch((err)=>{
@@ -36,6 +37,18 @@ methods.login = function(req,res){
     res.send({status:"failed", message_response:"Username doesnt exist"})
   })
 }
+
+
+methods.verify_token = (req,res) => {
+    jwt.verify(req.body.token, process.env.SECRET, function(err, decoded) {
+      if(decoded)
+        res.send(true)
+      else
+        res.send(false)  
+    });
+}
+
+
 
 
 module.exports = methods

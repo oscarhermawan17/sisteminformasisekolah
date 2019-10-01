@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   var MataPelajaran = sequelize.define('MataPelajaran', {
     nama_mata_pelajaran: DataTypes.STRING,
+    deskripsi: DataTypes.TEXT,
     status: DataTypes.STRING
   }, {});
   MataPelajaran.associate = function(models) {

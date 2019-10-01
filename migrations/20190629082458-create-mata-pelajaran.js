@@ -11,6 +11,9 @@ module.exports = {
       nama_mata_pelajaran: {
         type: Sequelize.STRING
       },
+      deskripsi: {
+        type: Sequelize.TEXT
+      },
       status: {
         type: Sequelize.STRING
       },

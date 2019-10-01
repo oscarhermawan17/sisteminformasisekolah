@@ -9,12 +9,15 @@ var BulkUsers = []
       let gender_generate_random = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
       BulkUsers.push({
         nomor_induk:`000${i}`,
+        nomor_induk_pegawai:null,
         nama_lengkap:`${random_name[random_1_name]} ${random_name[random_2_name]}`,
         username:`000${i}`,
         password:`$2b$10$XW5rxhgrUB4sTyCUlSNX4ueJxPlEHw/ftOGYfYzwIrruVNvzqHEYO`,
+        password_orang_tua:`$2b$10$XW5rxhgrUB4sTyCUlSNX4ueJxPlEHw/ftOGYfYzwIrruVNvzqHEYO`,
         alamat:`000${i}`,
         gender:gender_value[gender_generate_random],
         nomor_hp:`000${i}`,
+        nomor_hp_orang_tua:null,
         email:`000${i}`,
         role: role_generate_random,
         status_angkatan:`satu`,
