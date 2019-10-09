@@ -30,6 +30,44 @@ methods.getAllMataPelajarans = (req,res) =>{
     })
 }
 
+
+methods.updateMataPelajaran = async function(req,res){
+    try {
+        const tmpMataPelajaran = await db.MataPelajaran.findByPk(req.params.id)
+        let tmp = tmpMataPelajaran.dataValues
+        try{
+            const updateUser = await db.MataPelajaran.update(
+                { nama_mata_pelajaran:req.body.nama_mata_pelajaran,
+                  deskripsi:req.body.deskripsi
+                },
+                { where: { id : req.params.id }})
+                console.log('update use', updateUser)
+            if(updateUser[0] === 1){
+                db.MataPelajaran.findByPk(req.params.id)
+                .then(mata_pelajaran =>{
+                    console.log('suskes')
+                    res.send({status:"success", data:mata_pelajaran, message_response:"success update mata pelajaran"})
+                })
+                .catch(err=>{
+                    res.send({status:"failed", message_response:err})
+                })
+            } else {
+                console.log('masuk else')
+                res.send({status:"failed", message_response:"gagal update mata pelajaran"})
+            }
+                
+        }
+        catch(err){
+            res.send({status:"failed", message_response:"gagal update user"})
+        }
+    }
+    catch(err){
+        res.send({status:"failed", message_response:"data tidak ditemukan"})
+    }
+        
+
+}
+
 methods.deleteMataPelajaran = async function(req,res){
     try {
         const tmp_mata_pelajaran = await db.MataPelajaran.update(
@@ -55,6 +93,5 @@ methods.deleteMataPelajaran = async function(req,res){
         res.send({status:"failed", message_response:"gagal hapus mata pelajaran"})
     }
 }
-
 
 module.exports = methods

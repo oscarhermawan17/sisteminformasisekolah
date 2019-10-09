@@ -4,9 +4,6 @@ const saltRounds = 10;
 const methods = {};
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const operatorsAliases = {
-  $like: Op.like
-}
 
 methods.createUser = (req,res)=>{
     bcrypt.hash(req.body.password, saltRounds)
@@ -26,11 +23,11 @@ methods.createUser = (req,res)=>{
         .then(user =>{
             res.send({status:"success", data:user, message_response:"success create user"})
         })
-        .catch((err)=>{
+        .catch(err=>{
             res.send({status:"failed", message_response:err.message})
         })
     })
-    .catch((err)=>{
+    .catch(err=>{
         res.send({status:"failed", message_response:err.message})
     })
 }
@@ -50,7 +47,7 @@ methods.getAllTeachers = (req,res) =>{
     .then(users=>{
         res.send({status:"success", data:users, message_response:"success find all students"})
     })
-    .catch((err)=>{
+    .catch(err=>{
         res.send({status:"failed", message_response:"failed find all users"})
     })
 }
@@ -75,39 +72,38 @@ methods.getAllStudents = (req,res) =>{
     })
 }
 
-methods.testingQuery = async function(req,res){
-    try {
-        const tmpUser = await db.User.findAll({where:{username:"0001"}})
-        console.log(tmpUser[0].dataValues)
-        res.send(tmpUser)
-    }
-    catch(err){
-        res.send({status:"failed", message_response:"data tidak ditemukan"})
-    }
-}
+// methods.testingQuery = async function(req,res){
+//     try {
+//         const tmpUser = await db.User.findAll({where:{username:"0001"}})
+//         console.log(tmpUser[0].dataValues)
+//         res.send(tmpUser)
+//     }
+//     catch(err){
+//         res.send({status:"failed", message_response:"data tidak ditemukan"})
+//     }
+// }
 
-methods.updateUser = async function(req,res){
-    try {
-        const tmpUser = await db.User.findOne({
-        where:{
-            nomor_induk:req.body.nomor_induk
-        }})
-        let tmp = tmpUser.dataValues
-        try{
-            const updateUser = await db.User.update(
-                {nama_siswa:req.body.nama_siswa},
-                { where: { nomor_induk :req.body.nomor_induk }})
-            console.log("hasil = ", updateUser)
-            res.send({status:"success", message_response:"Sukses memperbarui data siswa"})
-        }
-        catch(err){
-            res.send({status:"failed", message_response:"gagal update user"})
-        }
-    }
-    catch(err){
-        res.send({status:"failed", message_response:"data tidak ditemukan"})
-    }
-}
+// methods.updateUser = async function(req,res){
+//     try {
+//         const tmpUser = await db.User.findOne({
+//         where:{
+//             nomor_induk:req.body.nomor_induk
+//         }})
+//         let tmp = tmpUser.dataValues
+//         try{
+//             const updateUser = await db.User.update(
+//                 {nama_siswa:req.body.nama_siswa},
+//                 { where: { nomor_induk :req.body.nomor_induk }})
+//             res.send({status:"success", message_response:"Sukses memperbarui data siswa"})
+//         }
+//         catch(err){
+//             res.send({status:"failed", message_response:"gagal update user"})
+//         }
+//     }
+//     catch(err){
+//         res.send({status:"failed", message_response:"data tidak ditemukan"})
+//     }
+// }
 
 
 //hapus hanya mengubah "status" menjadi deleted
