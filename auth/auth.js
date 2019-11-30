@@ -4,6 +4,7 @@ var jwt = require('jsonwebtoken');
 var methods = {}
 
 methods.login = (req,res) => {
+  console.log('masuk')
   // logic 3 login belum
   db.User.findOne({where : {username:req.body.username}})
   .then((user)=>{
