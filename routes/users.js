@@ -3,6 +3,7 @@ const router = express.Router()
 const api = require('../controllers/user_controller')
 const validation = require('../form_validation/form')
 
+router.get('/:role/get_single_user/:nomor_induk', api.getUserByNomorInduk);
 router.get('/get_all_students', api.getAllStudents);
 router.get('/get_all_teachers', api.getAllTeachers);
 router.post('/create_user', validation.user, api.createUser);

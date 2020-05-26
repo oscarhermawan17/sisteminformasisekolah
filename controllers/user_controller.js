@@ -72,6 +72,28 @@ methods.getAllStudents = (req,res) =>{
     })
 }
 
+//Get Student or Teacher by NIS
+methods.getUserByNomorInduk = (req,res) =>{
+    db.User.findOne({
+        attributes:['id', 'nomor_induk','nama_lengkap', 'alamat', 'gender', 'nomor_hp', 'email', 'username',],
+        where:{
+            status:['available'],
+            role:parseInt(req.params.role),
+            nomor_induk: req.params.nomor_induk
+        },
+        include: [{
+            attributes:['role'],
+            model: db.Role,
+        }]
+    })
+    .then(users=>{
+        res.send({status:"success", data:users, message_response:"success find all students"})
+    })
+    .catch((err)=>{
+        res.send({status:"failed", message_response:"failed find all users"})
+    })
+}
+
 // methods.testingQuery = async function(req,res){
 //     try {
 //         const tmpUser = await db.User.findAll({where:{username:"0001"}})
